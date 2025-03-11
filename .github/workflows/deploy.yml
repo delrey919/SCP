@@ -1,4 +1,4 @@
-name: Deploy Laravel
+name: Deploy File via SCP
 
 on:
   push:
@@ -12,6 +12,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Mostrar el fitxer
+        run: cat wow.txt
+
       - name: Connectar-se via SSH i executar ordres
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         with:
@@ -22,7 +25,6 @@ jobs:
           first_ssh: |
             echo "Ens hem connectat correctament al servidor!"
           scp: |
-           './app.tgz' => ${{ secrets.DOCUMENT_ROOT }}
+            wow.txt ${{ secrets.USER }}@${{ secrets.SSH }}:${{ secrets.DOCUMENT_ROOT }}/
           last_ssh: |
-            echo $LASTSSH
-            cd ${{ secrets.DOCUMENT_ROOT }}
+            echo "Fitxer enviat correctament a ${{ secrets.DOCUMENT_ROOT }}"
