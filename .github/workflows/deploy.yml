@@ -1,0 +1,26 @@
+name: Deploy File via SCP
+
+on:
+  push:
+    branches:
+      - main  # Es dispara quan es fa un push a la branca principal
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Mostra el fitxer
+        run: cat fitxer.txt
+
+      - name: Copy file to server via SCP
+        env:
+          SERVER: ${{ secrets.SERVER }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: |
+          sudo apt-get update && sudo apt-get install -y sshpass
+          sshpass -p "$PASSWORD" scp fitxer.txt $USERNAME@$SERVER:/ruta/destí/
