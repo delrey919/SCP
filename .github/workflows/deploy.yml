@@ -15,9 +15,9 @@ jobs:
       - name: Connectar-se via SSH i executar ordres
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         with:
-          host: ${{ secrets.SSH_HOST }}
-          user: ${{ secrets.SSH_USER }}
-          pass: ${{ secrets.SSH_PASS }}
-          port: ${{ secrets.SSH_PORT }}
+          host: ${{ secrets.SSH }}
+          user: ${{ secrets.USER }}
+          pass: ${{ secrets.PASS }}
+          port: 22
           first_ssh: |
             echo "Ens hem connectat correctament al servidor!"
